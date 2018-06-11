@@ -2,6 +2,7 @@
 set -eu
 
 echo "$OPSMAN_IP $OPSMAN_DOMAIN_OR_IP_ADDRESS" >> /etc/hosts
+echo "$PKS_API_IP $PKS_API_DOMAIN" >> /etc/hosts
 
 echo "Note - pre-requisite for this task to work:"
 echo "- Your PKS API endpoint [$PKS_API_DOMAIN] should be routable and accessible from the Concourse worker(s) network."
