@@ -30,6 +30,7 @@ params:
   OPSMAN_USERNAME:
   OPSMAN_PASSWORD:
   OPSMAN_DOMAIN_OR_IP_ADDRESS:
+  OPSMAN_IP:
 
 run:
   path: pcf-pipelines/tasks/apply-changes/task.sh
