@@ -24,9 +24,8 @@ main() {
     --username "$OPSMAN_USERNAME" \
     --password "$OPSMAN_PASSWORD" \
     --skip-ssl-validation -tr \
-    delete-product \
-    --product-name "$TILE_PRODUCT_NAME" \
-    --product-version "$product_version"
+    unstage-product \
+    --product-name "$TILE_PRODUCT_NAME"
 
 }
 
