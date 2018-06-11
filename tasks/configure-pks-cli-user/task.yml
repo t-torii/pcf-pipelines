@@ -7,10 +7,10 @@ image_resource:
     repository: czero/rootfs
 
 inputs:
-- name: pcf-pipelines-utils
+- name: pcf-pipelines
 
 run:
-  path: pcf-pipelines-utils/tasks/pcf/pks/configure-pks-cli-user/task.sh
+  path: pcf-pipelines/tasks/configure-pks-cli-user/task.sh
 
 params:
   OPSMAN_DOMAIN_OR_IP_ADDRESS:
