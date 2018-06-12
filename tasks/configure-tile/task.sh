@@ -43,6 +43,11 @@ main() {
   # retrieve final json content for the properties object after certificate processing
   export final_properties_object=$(cat updated_properties_object.json)
 
+  # dump parameters for debug
+  echo "product-name: $TILE_PRODUCT_NAME"
+  echo "product-resources: $resources_object"
+  echo "product-properties: $final_properties_object"
+
   # updates properties and resources parameters for tile in Ops Mgr
   om-linux \
     --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
