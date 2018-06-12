@@ -16,6 +16,8 @@ set -eu
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+echo "$OPSMAN_IP $OPSMAN_DOMAIN_OR_IP_ADDRESS" >> /etc/hosts
+
 echo "Retrieving current available version of ${TILE_PRODUCT_NAME}"
 product_version=$(om-linux \
   --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
