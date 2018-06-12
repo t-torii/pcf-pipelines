@@ -56,6 +56,7 @@ main() {
     --username "$OPSMAN_USERNAME" \
     --password "$OPSMAN_PASSWORD" \
     --skip-ssl-validation \
+    --trace \
     configure-product \
     --product-name "$TILE_PRODUCT_NAME" \
     --product-resources "$resources_object" \
