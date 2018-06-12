@@ -23,7 +23,6 @@ image_resource:
 
 inputs:
   - name: pcf-pipelines
-  - name: pivnet-product
 
 params:
   OPSMAN_CLIENT_ID:
@@ -31,6 +30,9 @@ params:
   OPSMAN_USERNAME:
   OPSMAN_PASSWORD:
   OPSMAN_DOMAIN_OR_IP_ADDRESS:
+  OPSMAN_IP:
+  TILE_PRODUCT_NAME:
+
 
 run:
   path: pcf-pipelines/tasks/stage-product/task.sh

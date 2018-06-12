@@ -15,7 +15,7 @@ main() {
     --skip-ssl-validation -tr  \
     deployed-products | grep ${TILE_PRODUCT_NAME} | cut -d "|" -f 3 | tr -d " ")
 
-  echo "Deleting product [${TILE_PRODUCT_NAME}], version [${product_version}] , from ${OPSMAN_DOMAIN_OR_IP_ADDRESS}"
+  echo "Unsteging product [${TILE_PRODUCT_NAME}], version [${product_version}] , from ${OPSMAN_DOMAIN_OR_IP_ADDRESS}"
 
   om-linux \
     --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \

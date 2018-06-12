@@ -16,49 +16,18 @@ set -eu
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-desired_version=$(jq --raw-output '.Release.Version' < ./pivnet-product/metadata.json)
-
-AVAILABLE=$(om-linux \
-  --skip-ssl-validation \
+echo "Retrieving current available version of ${TILE_PRODUCT_NAME}"
+product_version=$(om-linux \
+  --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
   --client-id "${OPSMAN_CLIENT_ID}" \
   --client-secret "${OPSMAN_CLIENT_SECRET}" \
-  --username "${OPSMAN_USERNAME}" \
-  --password "${OPSMAN_PASSWORD}" \
-  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
-  curl -path /api/v0/available_products)
-STAGED=$(om-linux \
-  --skip-ssl-validation \
-  --client-id "${OPSMAN_CLIENT_ID}" \
-  --client-secret "${OPSMAN_CLIENT_SECRET}" \
-  --username "${OPSMAN_USERNAME}" \
-  --password "${OPSMAN_PASSWORD}" \
-  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
-  curl -path /api/v0/staged/products)
+  --username "$OPSMAN_USERNAME" \
+  --password "$OPSMAN_PASSWORD" \
+  --skip-ssl-validation -tr  \
+  available-products | grep ${TILE_PRODUCT_NAME} | cut -d "|" -f 3 | tr -d " ")
 
-# Should the slug contain more than one product, pick only the first.
-FILE_PATH=`find ./pivnet-product -name *.pivotal | sort | head -1`
-unzip $FILE_PATH metadata/*
+echo "staging product [${TILE_PRODUCT_NAME}], version [${product_version}] , from ${OPSMAN_DOMAIN_OR_IP_ADDRESS}"
 
-PRODUCT_NAME="$(cat metadata/*.yml | grep '^name' | cut -d' ' -f 2)"
-
-# Figure out which products are unstaged.
-UNSTAGED_ALL=$(jq -n --argjson available "$AVAILABLE" --argjson staged "$STAGED" \
-  '$available - ($staged | map({"name": .type, "product_version": .product_version}))')
-
-UNSTAGED_PRODUCT=$(echo "$UNSTAGED_ALL" | jq \
-  --arg product_name "$PRODUCT_NAME" \
-  --arg product_version "$desired_version" \
-  'map(select(.name == $product_name)) | map(select(.product_version | startswith($product_version)))'
-)
-
-# There should be only one such unstaged product.
-if [ "$(echo $UNSTAGED_PRODUCT | jq '. | length')" -ne "1" ]; then
-  echo "Need exactly one unstaged build for $PRODUCT_NAME version $desired_version"
-  jq -n "$UNSTAGED_PRODUCT"
-  exit 1
-fi
-
-full_version=$(echo "$UNSTAGED_PRODUCT" | jq -r '.[].product_version')
 
 om-linux --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
   --skip-ssl-validation \
@@ -67,5 +36,5 @@ om-linux --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
   --username "${OPSMAN_USERNAME}" \
   --password "${OPSMAN_PASSWORD}" \
   stage-product \
-  --product-name "${PRODUCT_NAME}" \
-  --product-version "${full_version}"
+  --product-name "${TILE_PRODUCT_NAME}" \
+  --product-version "${product_version}"
