@@ -78,9 +78,10 @@ EOF
 
   # update properties object with generated certificates
   export tmp_updated_object=$(cat updated_object.json | jq '. | tojson')
+  echo "tmp_updated_object: $tmp_updated_object"
 
   cat updated_properties_object.json | jq \
-        ' . + {".properties.cloud_provider.gcp.service_key":{"value": "$tmp_updated_object"}}' > tmp_properties_object.json
+        ' . + {".properties.cloud_provider.gcp.service_key":{"value": "`echo $tmp_updated_object`"}}' > tmp_properties_object.json
 
   # override updated properties file with new certificates content
   cp tmp_properties_object.json updated_properties_object.json
