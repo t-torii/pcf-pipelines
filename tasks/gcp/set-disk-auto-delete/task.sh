@@ -17,12 +17,13 @@ main(){
 
 search_vm(){
   echo -e "\n==== search $1 vm ===="
-  export vms=$(gcloud compute instances list --filter='labels.instance_group=$1' \
+  filter=`echo labels.instance_group=$1`
+  export vms=$(gcloud compute instances list --filter='$filter' \
     --format=json | jq -r '.[] | .name')
   echo "vms = $vms"
   if [ $vms = ""]; then
     echo "$1 can't found!"
-    exit 0
+    return
   fi
 
   for vm in $vms
