@@ -1,5 +1,7 @@
 #!/bin/bash -eu
 
+echo "$PKS_API_IP $PCF_PKS_API" >> /etc/hosts
+
 echo "Login to PKS API [$PCF_PKS_API]"
 pks login -a "$PCF_PKS_API" -u "$PKS_CLI_USERNAME" -p "$PKS_CLI_PASSWORD" --skip-ssl-verification # TBD --ca-cert CERT-PATH
 
