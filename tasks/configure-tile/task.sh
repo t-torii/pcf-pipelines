@@ -39,6 +39,7 @@ main() {
 
   # process any certificate generation by introspecting into properties files
   process_certificates
+  append_gcp_service_key
 
   # retrieve final json content for the properties object after certificate processing
   export final_properties_object=$(cat updated_properties_object.json)
@@ -64,6 +65,27 @@ main() {
 
 }
 
+append_gcp_service_key() {
+  # create temporary cert json object
+  cat << EOF  > ./updated_object.json
+{
+".properties.cloud_provider.gcp.service_key": {
+"value": {
+  $gcp_service_key
+}
+}}
+EOF
+
+  # update properties object with generated certificates
+  export tmp_updated_object = `cat updated_object.json | jq '. | tojson'`
+
+  cat updated_properties_object.json | jq \
+        ' . + {".properties.cloud_provider.gcp.service_key":{"value": "$tmp_updated_object"}' > tmp_properties_object.json
+
+  # override updated properties file with new certificates content
+  cp tmp_properties_object.json updated_properties_object.json
+
+}
 #
 # Process certificate generation requests by introspecting into a
 # properties files and then searching for keys called "generate_cert_domains".

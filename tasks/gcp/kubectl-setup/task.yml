@@ -11,11 +11,11 @@ inputs:
 - name: pcf-pipelines
 
 run:
-  path: pcf-pipelines/tasks/gcp/pks-api-setup/task.sh
+  path: pcf-pipelines/tasks/gcp/kubectl-setup/task.sh
 
 params:
   GCP_PROJECT_NAME:
   GCP_REGION:
   GCP_ZONE:
   GCP_SERVICE_KEY:
-  PKS_API_LB_NAME:
+  PKS_KUBECTL_LB_NAME:
