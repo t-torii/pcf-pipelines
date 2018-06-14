@@ -78,7 +78,8 @@ append_gcp_service_key() {
 EOF
 
   cat updated_properties_object.json | jq \
-        ' . + --slurpfile updated_object updated_object.json' > tmp_properties_object.json
+  --slurpfile updated_object updated_object.json \
+        ' . + $updated_object[]' > tmp_properties_object.json
 
   # override updated properties file with new certificates content
   cp tmp_properties_object.json updated_properties_object.json
