@@ -8,7 +8,7 @@ echo -e "\n==== gcloud compute list ===="
 gcloud compute instances list
 
 echo -e "\n==== get kubenetes master vm ===="
-export master_vm=$(gcloud compute instances list --filter='tags.items=pivotal-container-service' \
+export master_vm=$(gcloud compute instances list --filter='labels.instance_group=pivotal-container-service' \
  --format=json | jq -r '.[] | .name')
 echo "master_vm = ${master_vm}"
 if [ $master_vm = ""]; then
