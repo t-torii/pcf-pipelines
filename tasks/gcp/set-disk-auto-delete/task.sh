@@ -17,9 +17,7 @@ main(){
 
 search_vm(){
   echo -e "\n==== search $1 vm ===="
-  filter=`echo \'labels.instance_group=$1\'`
-  echo $filter
-  export vms=$(gcloud compute instances list --filter=$filter \
+  export vms=$(gcloud compute instances list --filter='labels.instance_group='$1'' \
     --format=json | jq -r '.[] | .name')
   echo "vms = $vms"
   if [ $vms = ""]; then
@@ -35,12 +33,12 @@ search_vm(){
 
 set_disk_auto_delete(){
   echo -e "\n==== search disks of $1 ===="
-  export disks=$(gcloud compute instances describe $1 \
+  export disks=$(gcloud compute instances describe $1 --zone=$GCP_ZONE \
     --format=json | jq -r '.disks[].deviceName')
   echo "disks = $disks"
   for disk in $disks
   do
-    gcloud compute instances set-disk-auto-delete $1 --disk=$disk
+    gcloud compute instances set-disk-auto-delete $1 --disk=$disk --zone=$GCP_ZONE
   done
 
 }
