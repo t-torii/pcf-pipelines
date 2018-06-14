@@ -7,7 +7,7 @@ image_resource:
     repository: pivotalservices/pks-kubectl
 
 inputs:
-- name: pcf-pipelines-utils
+- name: pcf-pipelines
 
 run:
   path: pcf-pipelines/tasks/delete-pks-cluster/task.sh
