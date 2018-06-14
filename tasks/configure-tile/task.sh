@@ -71,7 +71,7 @@ append_gcp_service_key() {
 {
 ".properties.cloud_provider.gcp.service_key": {
 "value": {
-  $gcp_service_key
+  $GCP_SERVICE_KEY
 }
 }}
 EOF
