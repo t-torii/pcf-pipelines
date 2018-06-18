@@ -68,13 +68,6 @@ output "svc_net_1_subnet" {
   value = "${google_compute_subnetwork.subnet-services-1.name}"
 }
 
-
-// Http Load Balancer Output
-
-/utput "pub_ip_global_pcf" {
-  value = "${google_compute_global_address.pcf.address}"
-}
-
 output "pub_ip_opsman" {
   value = "${google_compute_address.opsman.address}"
 }
