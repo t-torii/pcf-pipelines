@@ -12,14 +12,14 @@ resource "google_compute_subnetwork" "subnet-ops-manager" {
 
 // ERT
 resource "google_compute_subnetwork" "subnet-ert" {
-  name          = "${var.prefix}-subnet-ert-${var.gcp_region}"
+  name          = "${var.prefix}-subnet-pks-${var.gcp_region}"
   ip_cidr_range = "192.168.16.0/22"
   network       = "${google_compute_network.pcf-virt-net.self_link}"
 }
 
 // Services Tile
 resource "google_compute_subnetwork" "subnet-services-1" {
-  name          = "${var.prefix}-subnet-services-1-${var.gcp_region}"
+  name          = "${var.prefix}-subnet-services-${var.gcp_region}"
   ip_cidr_range = "192.168.20.0/22"
   network       = "${google_compute_network.pcf-virt-net.self_link}"
 }

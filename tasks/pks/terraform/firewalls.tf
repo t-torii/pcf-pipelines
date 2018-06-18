@@ -40,11 +40,36 @@ resource "google_compute_firewall" "pcf-allow-https" {
   target_tags   = ["allow-https", "router"]
 }
 
+// Allow access to master nodes
+resource "google_compute_firewall" "pks-master" {
+  name    = "${var.prefix}-pks-master"
+  network = "${google_compute_network.pcf-virt-net.name}"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["8443"]
+  }
+
+  target_tags = ["master"]
+}
+
+// Allow access to PKS API
+resource "google_compute_firewall" "pks-api" {
+  name    = "${var.prefix}-pks-api"
+  network = "${google_compute_network.pcf-virt-net.name}"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["9021", "8443"]
+  }
+
+  target_tags = ["${var.prefix}-pks-api"]
+}
 
 //// Create Firewall Rule for allow-ert-all com between bosh deployed ert jobs
 //// This will match the default OpsMan tag configured for the deployment
 resource "google_compute_firewall" "allow-ert-all" {
-  name       = "${var.prefix}-allow-ert-all"
+  name       = "${var.prefix}-allow-pks-all"
   depends_on = ["google_compute_network.pcf-virt-net"]
   network    = "${google_compute_network.pcf-virt-net.name}"
 
