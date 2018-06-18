@@ -44,5 +44,5 @@ cd -
 
 echo "Please configure DNS as follows:"
 echo "----------------------------------------------------------------------------------------------"
-echo "opsman.${PCF_ERT_DOMAIN} == ${pub_ip_opsman}"
+echo "opsman.${GCP_RESOURCE_PREFIX} == ${pub_ip_opsman}"
 echo "----------------------------------------------------------------------------------------------"
