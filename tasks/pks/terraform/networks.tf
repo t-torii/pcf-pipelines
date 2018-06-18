@@ -1,5 +1,6 @@
 resource "google_compute_network" "pcf-virt-net" {
   name = "${var.prefix}-virt-net"
+  auto_create_subnetworks = false
 }
 
 // Ops Manager & Jumpbox

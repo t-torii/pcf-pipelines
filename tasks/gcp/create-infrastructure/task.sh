@@ -44,11 +44,5 @@ cd -
 
 echo "Please configure DNS as follows:"
 echo "----------------------------------------------------------------------------------------------"
-echo "*.${SYSTEM_DOMAIN} == ${pub_ip_global_pcf}"
-echo "*.${APPS_DOMAIN} == ${pub_ip_global_pcf}"
-echo "ssh.${SYSTEM_DOMAIN} == ${pub_ip_ssh_and_doppler}"
-echo "doppler.${SYSTEM_DOMAIN} == ${pub_ip_ssh_and_doppler}"
-echo "loggregator.${SYSTEM_DOMAIN} == ${pub_ip_ssh_and_doppler}"
-echo "tcp.${PCF_ERT_DOMAIN} == ${pub_ip_ssh_tcp_lb}"
 echo "opsman.${PCF_ERT_DOMAIN} == ${pub_ip_opsman}"
 echo "----------------------------------------------------------------------------------------------"
