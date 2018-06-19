@@ -23,7 +23,6 @@ params:
   GCP_ZONE_3:
   GCP_STORAGE_BUCKET_LOCATION:
   GCP_RESOURCE_PREFIX:
-  PCF_ERT_DOMAIN:
 
 run:
   path: pcf-pipelines/tasks/gcp/create-infrastructure/task.sh
