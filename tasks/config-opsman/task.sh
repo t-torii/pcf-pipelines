@@ -3,6 +3,7 @@
 set -eu
 
 if [[ $BYPASS = true ]]; then
+  echo "Bypassing the task"
   exit 0
 fi
 
