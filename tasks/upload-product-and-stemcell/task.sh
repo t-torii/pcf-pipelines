@@ -21,8 +21,6 @@ STEMCELL_VERSION=$(
     '
 )
 
-cat "STEMCELL_VERSION: $STEMCELL_VERSION"
-
 if [ -n "$STEMCELL_VERSION" ]; then
   diagnostic_report=$(
     om-linux \
