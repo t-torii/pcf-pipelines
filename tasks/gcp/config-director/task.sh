@@ -160,8 +160,9 @@ om-linux \
   --username "$OPS_MGR_USR" \
   --password "$OPS_MGR_PWD" \
   configure-director \
-  --iaas-configuration "$iaas_configuration" \
-  --director-configuration "$director_config"
+  --iaas-configuration "$iaas_configuration"
+
+#  --director-configuration "$director_config"
 
 
 #  --az-configuration "$az_configuration" \
