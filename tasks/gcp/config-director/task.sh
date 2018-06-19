@@ -163,18 +163,56 @@ om-linux \
   configure-director \
   --iaas-configuration "$iaas_configuration"
 
-  echo "Configuring Director..."
-  om-linux \
-    --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
-    --skip-ssl-validation \
-    --username "$OPS_MGR_USR" \
-    --password "$OPS_MGR_PWD" \
-    configure-director \
-    --director-configuration "$director_config"
+echo "Configuring Director..."
+om-linux \
+  --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
+  --skip-ssl-validation \
+  --username "$OPS_MGR_USR" \
+  --password "$OPS_MGR_PWD" \
+  configure-director \
+  --director-configuration "$director_config"
 
+echo "Configuring AZ..."
+om-linux \
+  --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
+  --skip-ssl-validation \
+  --username "$OPS_MGR_USR" \
+  --password "$OPS_MGR_PWD" \
+  configure-director \
+  --az-configuration "$az_configuration"
 
-#  --az-configuration "$az_configuration" \
-#  --networks-configuration "$network_configuration" \
-#  --network-assignment "$network_assignment" \
-#  --security-configuration "$security_configuration" \
-#  --resource-configuration "$resource_configuration"
+echo "Configuring Networks..."
+om-linux \
+  --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
+  --skip-ssl-validation \
+  --username "$OPS_MGR_USR" \
+  --password "$OPS_MGR_PWD" \
+  configure-director \
+  --networks-configuration "$network_configuration"
+
+echo "Configuring Network Assignment..."
+om-linux \
+  --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
+  --skip-ssl-validation \
+  --username "$OPS_MGR_USR" \
+  --password "$OPS_MGR_PWD" \
+  configure-director \
+  --network-assignment "$network_assignment"
+
+echo "Configuring Security Consideration..."
+om-linux \
+  --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
+  --skip-ssl-validation \
+  --username "$OPS_MGR_USR" \
+  --password "$OPS_MGR_PWD" \
+  configure-director \
+  --security-configuration "$security_configuration"
+
+echo "Configuring Resource Configuration..."
+om-linux \
+  --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
+  --skip-ssl-validation \
+  --username "$OPS_MGR_USR" \
+  --password "$OPS_MGR_PWD" \
+  configure-director \
+  --resource-configuration "$resource_configuration"
