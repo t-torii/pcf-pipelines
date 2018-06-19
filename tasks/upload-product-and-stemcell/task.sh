@@ -2,6 +2,8 @@
 
 set -eu
 
+cat ./pivnet-pks/metadata.json
+
 STEMCELL_VERSION=$(
   cat ./pivnet-pks/metadata.json |
   jq --raw-output \
@@ -18,6 +20,8 @@ STEMCELL_VERSION=$(
     | join(".")
     '
 )
+
+cat "STEMCELL_VERSION: $STEMCELL_VERSION"
 
 if [ -n "$STEMCELL_VERSION" ]; then
   diagnostic_report=$(
