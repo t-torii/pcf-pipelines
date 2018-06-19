@@ -25,6 +25,7 @@ terraform plan \
   -var "gcp_storage_bucket_location=${GCP_STORAGE_BUCKET_LOCATION}" \
   -var "prefix=${GCP_RESOURCE_PREFIX}" \
   -var "pcf_opsman_image_name=${pcf_opsman_image_name}" \
+  -var "pcf_ert_domain=${PCF_ERT_DOMAIN}" \
   -out terraform.tfplan \
   -state terraform-state/terraform.tfstate \
   pcf-pipelines/tasks/pks/terraform
