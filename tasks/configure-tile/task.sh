@@ -2,7 +2,9 @@
 set -eu
 
 main() {
-  echo "$OPSMAN_IP $OPSMAN_DOMAIN_OR_IP_ADDRESS" >> /etc/hosts
+  if [ -n $OPSMAN_IP]; then
+    echo "$OPSMAN_IP $OPSMAN_DOMAIN_OR_IP_ADDRESS" >> /etc/hosts
+  fi
 
   # NETWORK
   echo "$TILE_NETWORK" > ./network_object.yml
