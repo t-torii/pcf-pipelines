@@ -154,7 +154,7 @@ om-linux \
   --password "$OPS_MGR_PWD" \
   available-products
 
-echo "Configuring IaaS and Director..."
+echo "Configuring IaaS..."
 om-linux \
   --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
   --skip-ssl-validation \
@@ -163,7 +163,14 @@ om-linux \
   configure-director \
   --iaas-configuration "$iaas_configuration"
 
-#  --director-configuration "$director_config"
+  echo "Configuring Director..."
+  om-linux \
+    --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
+    --skip-ssl-validation \
+    --username "$OPS_MGR_USR" \
+    --password "$OPS_MGR_PWD" \
+    configure-director \
+    --director-configuration "$director_config"
 
 
 #  --az-configuration "$az_configuration" \
