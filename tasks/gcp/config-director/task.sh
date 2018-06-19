@@ -146,6 +146,13 @@ network_assignment=$(
     }'
 )
 
+om-linux \
+  --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
+  --skip-ssl-validation \
+  --username "$OPS_MGR_USR" \
+  --password "$OPS_MGR_PWD" \
+  available-products
+
 echo "Configuring IaaS and Director..."
 om-linux \
   --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
@@ -153,10 +160,11 @@ om-linux \
   --username "$OPS_MGR_USR" \
   --password "$OPS_MGR_PWD" \
   configure-director \
-  --iaas-configuration "$iaas_configuration" \
-  --director-configuration "$director_config" \
-  --az-configuration "$az_configuration" \
-  --networks-configuration "$network_configuration" \
-  --network-assignment "$network_assignment" \
-  --security-configuration "$security_configuration" \
-  --resource-configuration "$resource_configuration"
+  --iaas-configuration "$iaas_configuration"
+
+#  --director-configuration "$director_config" \
+#  --az-configuration "$az_configuration" \
+#  --networks-configuration "$network_configuration" \
+#  --network-assignment "$network_assignment" \
+#  --security-configuration "$security_configuration" \
+#  --resource-configuration "$resource_configuration"
