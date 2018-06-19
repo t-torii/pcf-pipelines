@@ -3,7 +3,7 @@
 set -eu
 
 STEMCELL_VERSION=$(
-  cat ./pivnet-product/metadata.json |
+  cat ./pivnet-pks/metadata.json |
   jq --raw-output \
     '
     [
@@ -50,7 +50,7 @@ if [ -n "$STEMCELL_VERSION" ]; then
         else
           "stemcells"
         end
-        ' < pivnet-product/metadata.json
+        ' < pivnet-pks/metadata.json
     )
 
     pivnet-cli login --api-token="$PIVNET_API_TOKEN"
@@ -75,7 +75,7 @@ if [ -n "$STEMCELL_VERSION" ]; then
 fi
 
 # Should the slug contain more than one product, pick only the first.
-FILE_PATH=`find ./pivnet-product -name *.pivotal | sort | head -1`
+FILE_PATH=`find ./pivnet-pks -name *.pivotal | sort | head -1`
 om-linux -t https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
   --client-id "${OPSMAN_CLIENT_ID}" \
   --client-secret "${OPSMAN_CLIENT_SECRET}" \

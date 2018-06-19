@@ -20,7 +20,7 @@ params:
   IAAS:
 
 inputs:
-  - name: pivnet-product
+  - name: pivnet-pks
   - name: pcf-pipelines
 
 run:
