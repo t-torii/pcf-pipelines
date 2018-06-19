@@ -2,10 +2,6 @@
 
 set -eu
 
-if [[ -n "$NO_PROXY" ]]; then
-  echo "$OM_IP $OPSMAN_DOMAIN_OR_IP_ADDRESS" >> /etc/hosts
-fi
-
 STEMCELL_VERSION=$(
   cat ./pivnet-product/metadata.json |
   jq --raw-output \
