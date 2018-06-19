@@ -16,8 +16,7 @@ iaas_configuration=$(
     '
 )
 
-# availability_zones="${GCP_ZONE_1},${GCP_ZONE_2},${GCP_ZONE_3}"
-availability_zones="${GCP_ZONE_1}"
+availability_zones="${GCP_ZONE_1},${GCP_ZONE_2},${GCP_ZONE_3}"
 
 az_configuration=$(
   jq -n \
