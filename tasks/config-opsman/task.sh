@@ -2,6 +2,10 @@
 
 set -eu
 
+if [[ $BYPASS = true ]]; then
+  exit 0
+fi
+
 until $(curl --output /dev/null -k --silent --head --fail https://$OPSMAN_DOMAIN_OR_IP_ADDRESS/setup); do
     printf '.'
     sleep 5

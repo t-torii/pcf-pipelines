@@ -13,6 +13,7 @@ params:
   OPS_MGR_USR:
   OPS_MGR_PWD:
   OM_DECRYPTION_PWD:
+  BYPASS:
 
 inputs:
   - name: pcf-pipelines
