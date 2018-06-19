@@ -16,6 +16,16 @@ export GOOGLE_REGION=${GCP_REGION}
 
 terraform init pcf-pipelines/tasks/pks/terraform
 
+echo "gcp_proj_id=${GCP_PROJECT_ID}"
+echo "gcp_region=${GCP_REGION}"
+echo "gcp_zone_1=${GCP_ZONE_1}"
+echo "gcp_zone_2=${GCP_ZONE_2}"
+echo "gcp_zone_3=${GCP_ZONE_3}"
+echo "gcp_storage_bucket_location=${GCP_STORAGE_BUCKET_LOCATION}"
+echo "pcf_ert_domain=${PCF_ERT_DOMAIN}"
+echo "prefix=${GCP_RESOURCE_PREFIX}"
+echo "pcf_opsman_image_name=${pcf_opsman_image_name}"
+
 terraform plan \
   -var "gcp_proj_id=${GCP_PROJECT_ID}" \
   -var "gcp_region=${GCP_REGION}" \
@@ -23,9 +33,9 @@ terraform plan \
   -var "gcp_zone_2=${GCP_ZONE_2}" \
   -var "gcp_zone_3=${GCP_ZONE_3}" \
   -var "gcp_storage_bucket_location=${GCP_STORAGE_BUCKET_LOCATION}" \
+  -var "pcf_ert_domain=${PCF_ERT_DOMAIN}" \
   -var "prefix=${GCP_RESOURCE_PREFIX}" \
   -var "pcf_opsman_image_name=${pcf_opsman_image_name}" \
-  -var "pcf_ert_domain=${PCF_ERT_DOMAIN}" \
   -out terraform.tfplan \
   -state terraform-state/terraform.tfstate \
   pcf-pipelines/tasks/pks/terraform
