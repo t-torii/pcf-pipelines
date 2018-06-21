@@ -21,9 +21,10 @@ resource "google_compute_instance" "ops-manager" {
     }
   }
   service_account {
-    email  = "${var.service_account_email}"
+    email  = "${google_service_account.opsman_service_account.email}"
     scopes = ["cloud-platform"]
   }
+
 }
 
 resource "google_storage_bucket" "director" {
