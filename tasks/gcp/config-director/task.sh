@@ -104,7 +104,8 @@ director_config=$(cat <<-EOF
   "resurrector_enabled": true,
   "retry_bosh_deploys": true,
   "database_type": "internal",
-  "blobstore_type": "local"
+  "blobstore_type": "local",
+  "post_deploy_enabled": true
 }
 EOF
 )
