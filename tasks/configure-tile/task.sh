@@ -76,7 +76,7 @@ append_gcp_service_key() {
 {
 ".properties.cloud_provider.master_service_account_key": {
 "value": $tmp_updated_object
-}
+},
 "properties.cloud_provider.gcp.worker_service_account_key": {
 "value": $tmp_updated_object
 }
