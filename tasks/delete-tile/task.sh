@@ -2,7 +2,9 @@
 set -eu
 
 main() {
-  echo "$OPSMAN_IP $OPSMAN_DOMAIN_OR_IP_ADDRESS" >> /etc/hosts
+  if [ -n $OPSMAN_IP]; then
+    echo "$OPSMAN_IP $OPSMAN_DOMAIN_OR_IP_ADDRESS" >> /etc/hosts
+  fi
 
   # find tile version installed
   echo "Retrieving current staged version of ${TILE_PRODUCT_NAME}"
