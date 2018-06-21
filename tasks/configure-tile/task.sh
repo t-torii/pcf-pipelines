@@ -74,9 +74,13 @@ append_gcp_service_key() {
 
   cat << EOF  > ./updated_object.json
 {
-".properties.cloud_provider.gcp.service_key": {
+".properties.cloud_provider.master_service_account_key": {
 "value": $tmp_updated_object
-}}
+}
+"properties.cloud_provider.gcp.worker_service_account_key": {
+"value": $tmp_updated_object
+}
+}
 EOF
 
   cat updated_properties_object.json | jq \
