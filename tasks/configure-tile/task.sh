@@ -83,12 +83,12 @@ append_gcp_service_key() {
 }
 EOF
 
-cat << EOF  > ./updated_object.json
-{
-".properties.cloud_provider.gcp.service_key": {
- "value": $tmp_updated_object
-}}
-EOF
+# cat << EOF  > ./updated_object.json
+# {
+# ".properties.cloud_provider.gcp.service_key": {
+#  "value": $tmp_updated_object
+# }}
+# EOF
 
   cat updated_properties_object.json | jq \
   --slurpfile updated_object updated_object.json \
