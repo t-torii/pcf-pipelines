@@ -2,7 +2,7 @@
 set -eu
 
 main() {
-  if [ -n $OPSMAN_IP]; then
+  if [ -n $OPSMAN_IP ]; then
     echo "$OPSMAN_IP $OPSMAN_DOMAIN_OR_IP_ADDRESS" >> /etc/hosts
   fi
 
