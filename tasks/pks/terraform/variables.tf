@@ -14,6 +14,4 @@ variable "gcp_storage_bucket_location" {}
 
 variable "pcf_opsman_image_name" {}
 
-variable "service_account_key" {
-  type = "string"
-}
+variable "service_account_email"{}

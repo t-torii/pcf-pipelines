@@ -25,7 +25,7 @@ terraform plan \
   -var "gcp_storage_bucket_location=${GCP_STORAGE_BUCKET_LOCATION}" \
   -var "prefix=${GCP_RESOURCE_PREFIX}" \
   -var "pcf_opsman_image_name=${pcf_opsman_image_name}" \
-  -var "service_account_key=${GCP_SERVICE_ACCOUNT_KEY}" \
+  -var "service_account_email=${GCP_SERVICE_ACCOUNT_EMAIL}"
   -out terraform.tfplan \
   -state terraform-state/terraform.tfstate \
   pcf-pipelines/tasks/pks/terraform

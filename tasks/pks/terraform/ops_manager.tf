@@ -20,6 +20,10 @@ resource "google_compute_instance" "ops-manager" {
       nat_ip = "${google_compute_address.opsman.address}"
     }
   }
+  service_account {
+    email  = "${ver.service_account_email}"
+    scopes = ["cloud-platform"]
+  }
 }
 
 resource "google_storage_bucket" "director" {
