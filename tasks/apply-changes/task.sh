@@ -18,7 +18,9 @@ set -eu
 
 echo "Applying changes on Ops Manager @ ${OPSMAN_DOMAIN_OR_IP_ADDRESS}"
 
-echo "$OPSMAN_IP $OPSMAN_DOMAIN_OR_IP_ADDRESS" >> /etc/hosts
+if [ -n $OPSMAN_IP ]; then
+  echo "$OPSMAN_IP $OPSMAN_DOMAIN_OR_IP_ADDRESS" >> /etc/hosts
+fi
 
 om-linux \
   --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
