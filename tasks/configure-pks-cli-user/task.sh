@@ -10,6 +10,10 @@ echo "Note - pre-requisite for this task to work:"
 echo "- Your PKS API endpoint [$PKS_API_DOMAIN] should be routable and accessible from the Concourse worker(s) network."
 echo "- See PKS tile documentation for configuration details for vSphere [https://docs.pivotal.io/runtimes/pks/1-0/installing-pks-vsphere.html#loadbalancer-pks-api] and GCP [https://docs.pivotal.io/runtimes/pks/1-0/installing-pks-gcp.html#loadbalancer-pks-api]"
 
+echo "nslookup"
+nslookup $OPSMAN_DOMAIN_OR_IP_ADDRESS
+nslookup $PKS_API_DOMAIN
+
 echo "Retrieving PKS tile properties from Ops Manager [https://$OPSMAN_DOMAIN_OR_IP_ADDRESS]..."
 # get PKS UAA admin credentails from OpsMgr
 PRODUCTS=$(om-linux --target "https://$OPSMAN_DOMAIN_OR_IP_ADDRESS" --client-id "${OPSMAN_CLIENT_ID}" --client-secret "${OPSMAN_CLIENT_SECRET}" --username "$OPSMAN_USERNAME" --password "$OPSMAN_PASSWORD" --skip-ssl-validation curl -p /api/v0/staged/products)
