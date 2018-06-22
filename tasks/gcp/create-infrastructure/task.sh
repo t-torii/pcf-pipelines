@@ -41,9 +41,11 @@ cd $root/create-infrastructure-output
   pub_ip_ssh_and_doppler=$(echo $output_json | jq --raw-output '.pub_ip_ssh_and_doppler.value')
   pub_ip_ssh_tcp_lb=$(echo $output_json | jq --raw-output '.pub_ip_ssh_tcp_lb.value')
   pub_ip_opsman=$(echo $output_json | jq --raw-output '.pub_ip_opsman.value')
+  pub_ip_pks_api=$(echo $output_json | jq --raw-output '.pub_ip_pks_api.value')
 cd -
 
 echo "Please configure DNS as follows:"
 echo "----------------------------------------------------------------------------------------------"
 echo "${OPSMAN_DOMAIN_OR_IP_ADDRESS} == ${pub_ip_opsman}"
+echo "${GCP_RESOURCE_PREFIX}-pks-api == ${pub_ip_pks_api}"
 echo "----------------------------------------------------------------------------------------------"

@@ -67,3 +67,7 @@ output "svc_net_1_subnet" {
 output "pub_ip_opsman" {
   value = "${google_compute_address.opsman.address}"
 }
+
+output "pub_ip_pks_api" {
+  value = "${google_compute_address.pks-api.address}"
+}
