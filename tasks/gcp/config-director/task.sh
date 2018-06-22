@@ -6,12 +6,12 @@ iaas_configuration=$(
   jq -n \
     --arg gcp_project "$GCP_PROJECT_ID" \
     --arg default_deployment_tag "$GCP_RESOURCE_PREFIX" \
-    --arg auth_json "$GCP_SERVICE_ACCOUNT_KEY" \
+    --arg my-google-service-account "$GCP_SERVICE_ACCOUNT_EMAIL" \
     '
     {
       "project": $gcp_project,
       "default_deployment_tag": $default_deployment_tag,
-      "auth_json": $auth_json
+      "associated_service_account": $my-google-service-account
     }
     '
 )
@@ -82,7 +82,7 @@ network_configuration=$(
         },
         {
           "name": $services_network_name,
-          "service_network": false,
+          "service_network": true,
           "subnets": [
             {
               "iaas_identifier": $services_vcenter_network,

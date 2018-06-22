@@ -27,3 +27,13 @@ resource "google_compute_instance" "nat-gateway-pri" {
   sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
   EOF
 }
+
+resource "google_compute_route" "nat-primary" {
+  name                   = "${var.prefix}-nat-pri"
+  dest_range             = "0.0.0.0/0"
+  network                = "${google_compute_network.pcf-virt-net.name}"
+  next_hop_instance      = "${google_compute_instance.nat-gateway-pri.name}"
+  next_hop_instance_zone = "${var.gcp_zone_1}"
+  priority               = 800
+  tags                   = ["${var.prefix}"]
+}

@@ -21,7 +21,8 @@ params:
   GCP_ZONE_3:
   GCP_RESOURCE_PREFIX:
   GCP_SERVICE_ACCOUNT_KEY:
-  JUMP_SERVER_IP_ADDRESS: 
+  JUMP_SERVER_IP_ADDRESS:
+  GCP_SERVICE_ACCOUNT_EMAIL:
 
 run:
   path: pcf-pipelines/tasks/gcp/config-director/task.sh
