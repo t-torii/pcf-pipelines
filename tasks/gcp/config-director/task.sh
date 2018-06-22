@@ -6,12 +6,12 @@ iaas_configuration=$(
   jq -n \
     --arg gcp_project "$GCP_PROJECT_ID" \
     --arg default_deployment_tag "$GCP_RESOURCE_PREFIX" \
-    --arg my-google-service-account "$GCP_SERVICE_ACCOUNT_EMAIL" \
+    --arg google_service_account "$GCP_SERVICE_ACCOUNT_EMAIL" \
     '
     {
       "project": $gcp_project,
       "default_deployment_tag": $default_deployment_tag,
-      "associated_service_account": $my-google-service-account
+      "associated_service_account": $google_service_account
     }
     '
 )
