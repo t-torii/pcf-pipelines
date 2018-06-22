@@ -22,6 +22,7 @@ params:
   OPSMAN_USERNAME:
   OPSMAN_PASSWORD:
   OPSMAN_ZONE:
+  GCP_SERVICE_ACCOUNT_EMAIL:
 
 run:
   path: pcf-pipelines/tasks/gcp/wipe-env/task.sh
