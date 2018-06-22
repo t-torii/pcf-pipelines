@@ -1,8 +1,10 @@
 #!/bin/bash -eu
-echo "$PKS_API_IP $PCF_PKS_API" >> /etc/hosts
+if [ -n $PKS_API_IP ]; then
+  echo "$PKS_API_IP $PCF_PKS_API" >> /etc/hosts
+fi
 
 echo "Login to PKS API [$PCF_PKS_API]"
-pks login -a "$PCF_PKS_API" -u "$PKS_CLI_USERNAME" -p "$PKS_CLI_PASSWORD" --skip-ssl-verification # TBD --ca-cert CERT-PATH
+pks login -a "$PCF_PKS_API" -u "$PKS_CLI_USERNAME" -p "$PKS_CLI_PASSWORD" --skip-ssl-validation # TBD --ca-cert CERT-PATH
 pks cluster "$PKS_CLUSTER_NAME"
 
 echo "Deleting PKS cluster [$PKS_CLUSTER_NAME]..."

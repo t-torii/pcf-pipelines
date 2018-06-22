@@ -11,7 +11,7 @@ echo -e "\n==== get kubenetes master vm ===="
 export master_vm=$(gcloud compute instances list --filter='tags.items=master' \
  --format=json | jq -r '.[] | .name')
 echo "master_vm = ${master_vm}"
-if [ $master_vm = ""]; then
+if [ $master_vm = "" ]; then
   echo "master_vm can't found!"
   exit 1
 fi
