@@ -16,8 +16,8 @@ if [ $master_vm = ""]; then
   exit 1
 fi
 
-echo -e "\n==== add firewall rule to master vm ===="
-gcloud compute instances add-tags ${master_vm} --tags="pks-kubectl" --zone=${GCP_ZONE}
+# echo -e "\n==== add firewall rule to master vm ===="
+# gcloud compute instances add-tags ${master_vm} --tags="pks-kubectl" --zone=${GCP_ZONE}
 
 echo -e "\n==== loadbalancer check ===="
 gcloud compute target-pools describe ${PKS_KUBECTL_LB_NAME} --region=${GCP_REGION}
