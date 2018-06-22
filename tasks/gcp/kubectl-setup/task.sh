@@ -20,11 +20,11 @@ fi
 # gcloud compute instances add-tags ${master_vm} --tags="pks-kubectl" --zone=${GCP_ZONE}
 
 echo -e "\n==== loadbalancer check ===="
-gcloud compute target-pools describe ${PKS_KUBECTL_LB_NAME} --region=${GCP_REGION}
+gcloud compute target-pools describe ${GCP_RESOURCE_PREFIX}-master --region=${GCP_REGION}
 
 echo -e "\n==== add master vm to loadbalancer ===="
-gcloud compute target-pools add-instances ${PKS_KUBECTL_LB_NAME} \
+gcloud compute target-pools add-instances ${GCP_RESOURCE_PREFIX}-master \
  --instances=${master_vm} --instances-zone=${GCP_ZONE}
 
 echo -e "\n==== loadbalancer check ===="
-gcloud compute target-pools describe ${PKS_KUBECTL_LB_NAME} --region=${GCP_REGION}
+gcloud compute target-pools describe ${GCP_RESOURCE_PREFIX}-master --region=${GCP_REGION}
