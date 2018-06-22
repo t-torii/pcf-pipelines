@@ -10,22 +10,18 @@ main() {
   echo "Retrieving current staged version of ${TILE_PRODUCT_NAME}"
   product_version=$(om-linux \
     --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
-    --client-id "${OPSMAN_CLIENT_ID}" \
-    --client-secret "${OPSMAN_CLIENT_SECRET}" \
     --username "$OPSMAN_USERNAME" \
     --password "$OPSMAN_PASSWORD" \
-    --skip-ssl-validation -tr  \
+    --skip-ssl-validation  \
     deployed-products | grep ${TILE_PRODUCT_NAME} | cut -d "|" -f 3 | tr -d " ")
 
   echo "Unsteging product [${TILE_PRODUCT_NAME}], version [${product_version}] , from ${OPSMAN_DOMAIN_OR_IP_ADDRESS}"
 
   om-linux \
     --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
-    --client-id "${OPSMAN_CLIENT_ID}" \
-    --client-secret "${OPSMAN_CLIENT_SECRET}" \
     --username "$OPSMAN_USERNAME" \
     --password "$OPSMAN_PASSWORD" \
-    --skip-ssl-validation -tr \
+    --skip-ssl-validation \
     unstage-product \
     --product-name "$TILE_PRODUCT_NAME"
 
