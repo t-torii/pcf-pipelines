@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-if [ -n $OPSMAN_IP ]; then
+if [ -n $PKS_API_IP ]; then
   echo "$PKS_API_IP $PCF_PKS_API" >> /etc/hosts
 fi
 
