@@ -7,6 +7,8 @@ if [[ $BYPASS = true ]]; then
   exit 0
 fi
 
+nslookup $OPSMAN_DOMAIN_OR_IP_ADDRESS
+
 until $(curl --output /dev/null -k --silent --head --fail https://$OPSMAN_DOMAIN_OR_IP_ADDRESS/setup); do
     printf '.'
     sleep 5
