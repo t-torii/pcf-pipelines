@@ -3,6 +3,7 @@ set -e
 
 source "pcf-pipelines/functions/check_opsman_available.sh"
 
+ifconfig
 cat /etc/resolv.conf
 nslookup ${OPSMAN_DOMAIN_OR_IP_ADDRESS}
 
