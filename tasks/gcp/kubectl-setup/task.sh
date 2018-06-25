@@ -19,7 +19,10 @@ fi
 # echo -e "\n==== add firewall rule to master vm ===="
 # gcloud compute instances add-tags ${master_vm} --tags="pks-kubectl" --zone=${GCP_ZONE}
 
-echo -e "\n==== loadbalancer check ===="
+echo -e "\n==== loadbalancer create ===="
+gcloud compute target-pools create ${GCP_RESOURCE_PREFIX}-master --region=${GCP_REGION}
+gcloud compute forwarding-rules create ${GCP_RESOURCE_PREFIX}-master-8443 --region=${GCP_REGION} \
+--target-pool=${GCP_RESOURCE_PREFIX}-master
 gcloud compute target-pools describe ${GCP_RESOURCE_PREFIX}-master --region=${GCP_REGION}
 
 echo -e "\n==== add master vm to loadbalancer ===="
