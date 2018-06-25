@@ -1,7 +1,7 @@
 // NAT Primary
 resource "google_compute_instance" "nat-gateway-pri" {
   name           = "${var.prefix}-nat-gateway-pri"
-  machine_type   = "n1-standard-4"
+  machine_type   = "g1-small"
   zone           = "${var.gcp_zone_1}"
   can_ip_forward = true
   tags           = ["${var.prefix}-nat-instance", "nat-traverse"]
