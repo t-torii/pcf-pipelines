@@ -22,7 +22,7 @@ fi
 echo -e "\n==== loadbalancer create ===="
 gcloud compute target-pools create ${GCP_RESOURCE_PREFIX}-master --region=${GCP_REGION}
 gcloud compute forwarding-rules create ${GCP_RESOURCE_PREFIX}-master-8443 --region=${GCP_REGION} \
---target-pool=${GCP_RESOURCE_PREFIX}-master
+--target-pool=${GCP_RESOURCE_PREFIX}-master --ip-protocol=tcp --port-range=8443-8443
 gcloud compute target-pools describe ${GCP_RESOURCE_PREFIX}-master --region=${GCP_REGION}
 
 echo -e "\n==== add master vm to loadbalancer ===="
