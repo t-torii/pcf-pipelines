@@ -3,6 +3,7 @@
 set -euo pipefail
 
 echo "start configure-pas"
+nslookup ${OPSMAN_DOMAIN_OR_IP_ADDRESS}
 
 source pcf-pipelines/functions/generate_cert.sh
 
