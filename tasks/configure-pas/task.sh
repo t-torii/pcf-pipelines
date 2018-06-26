@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-export OPSMAN_DOMAIN_OR_IP_ADDRESS="opsman.$PCF_ERT_DOMAIN"
+echo "start configure-pas"
 
 source pcf-pipelines/functions/generate_cert.sh
 
