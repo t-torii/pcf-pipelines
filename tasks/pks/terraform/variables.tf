@@ -15,3 +15,7 @@ variable "gcp_storage_bucket_location" {}
 variable "pcf_opsman_image_name" {}
 
 variable "service_account_email"{}
+
+variable "pcf_ert_ssl_cert" {}
+
+variable "pcf_ert_ssl_key" {}

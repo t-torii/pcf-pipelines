@@ -71,3 +71,23 @@ output "pub_ip_opsman" {
 output "pub_ip_pks_api" {
   value = "${google_compute_address.pks-api.address}"
 }
+
+output "pub_ip_global_pcf" {
+  value = "${google_compute_global_address.pcf.address}"
+}
+
+output "pub_ip_ssh_and_doppler" {
+  value = "${google_compute_address.ssh-and-doppler.address}"
+}
+
+output "pub_ip_ssh_tcp_lb" {
+  value = "${google_compute_address.cf-tcp.address}"
+}
+
+output "ert_certificate" {
+  value = "${google_compute_ssl_certificate.ssl-cert.certificate}"
+}
+
+output "ert_certificate_key" {
+  value = "${google_compute_ssl_certificate.ssl-cert.private_key}"
+}
