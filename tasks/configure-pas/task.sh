@@ -132,8 +132,6 @@ cf_resources=$(
 
     .router |= . + { "elb_names": ["http:\($terraform_prefix)-http-lb-backend","tcp:\($terraform_prefix)-wss-logs"] }
     | .diego_brain |= . + { "elb_names": ["tcp:\($terraform_prefix)-ssh-proxy"] }
-      .
-    end
     '
 )
 
