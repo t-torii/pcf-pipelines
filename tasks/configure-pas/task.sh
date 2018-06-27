@@ -171,8 +171,8 @@ cf_properties=$(
       ".ha_proxy.skip_cert_verify": { "value": true },
       ".properties.container_networking_interface_plugin.silk.network_cidr": { "value": $container_networking_nw_cidr },
       ".properties.route_services.enable.ignore_ssl_cert_verification": { "value": true },
-      ".properties.system_database": { "value": "internal" },
-      ".properties.uaa_database": { "value": "internal" },
+      ".properties.system_database": { "value": "internal_mysql" },
+      ".properties.uaa_database": { "value": "internal_mysql" },
       ".properties.push_apps_manager_company_name": { "value": "pcf" },
       ".cloud_controller.system_domain": { "value": $system_domain },
       ".cloud_controller.apps_domain": { "value": $apps_domain },
@@ -198,7 +198,7 @@ cf_properties=$(
     # Blobstore
 
       {
-        ".properties.system_blobstore": { "value": "external_gcs" },
+        ".properties.system_blobstore": { "value": "internal" },
         ".properties.system_blobstore.external_gcs.buildpacks_bucket": { "value": "\($terraform_prefix)-buildpacks" },
         ".properties.system_blobstore.external_gcs.droplets_bucket": { "value": "\($terraform_prefix)-droplets" },
         ".properties.system_blobstore.external_gcs.packages_bucket": { "value": "\($terraform_prefix)-packages" },
