@@ -199,12 +199,6 @@ cf_properties=$(
 
       {
         ".properties.system_blobstore": { "value": "internal" },
-        ".properties.system_blobstore.external_gcs.buildpacks_bucket": { "value": "\($terraform_prefix)-buildpacks" },
-        ".properties.system_blobstore.external_gcs.droplets_bucket": { "value": "\($terraform_prefix)-droplets" },
-        ".properties.system_blobstore.external_gcs.packages_bucket": { "value": "\($terraform_prefix)-packages" },
-        ".properties.system_blobstore.external_gcs.resources_bucket": { "value": "\($terraform_prefix)-resources" },
-        ".properties.system_blobstore.external_gcs.access_key": { "value": $gcp_storage_access_key },
-        ".properties.system_blobstore.external_gcs.secret_key": { "value": { "secret": $gcp_storage_secret_key } }
       }
 
     +
