@@ -9,6 +9,15 @@ pcf_opsman_bucket_path=$(grep -i 'us:.*.tar.gz' pivnet-opsmgr/*GCP.yml | cut -d'
 # ops-manager-us/pcf-gcp-1.9.2.tar.gz -> opsman-pcf-gcp-1-9-2
 pcf_opsman_image_name=$(echo $pcf_opsman_bucket_path | sed 's%.*/\(.*\).tar.gz%opsman-\1%' | sed 's/\./-/g')
 
+if [[ ${POE_SSL_NAME1} == "" || ${POE_SSL_NAME1} == "null" ]]; then
+  echo "Generating Self Signed Certs for ${SYSTEM_DOMAIN} & ${APPS_DOMAIN} ..."
+  pcf-pipelines/scripts/gen_ssl_certs.sh "${SYSTEM_DOMAIN}" "${APPS_DOMAIN}"
+  pcf_ert_ssl_cert=$(cat ${SYSTEM_DOMAIN}.crt)
+  pcf_ert_ssl_key=$(cat ${SYSTEM_DOMAIN}.key)
+else
+  pcf_ert_ssl_cert="$POE_SSL_CERT1"
+  pcf_ert_ssl_key="$POE_SSL_KEY1"
+fi
 
 export GOOGLE_CREDENTIALS=${GCP_SERVICE_ACCOUNT_KEY}
 export GOOGLE_PROJECT=${GCP_PROJECT_ID}
@@ -26,6 +35,8 @@ terraform plan \
   -var "prefix=${GCP_RESOURCE_PREFIX}" \
   -var "pcf_opsman_image_name=${pcf_opsman_image_name}" \
   -var "service_account_email=${GCP_SERVICE_ACCOUNT_EMAIL}" \
+  -var "pcf_ert_ssl_cert=${pcf_ert_ssl_cert}" \
+  -var "pcf_ert_ssl_key=${pcf_ert_ssl_key}" \
   -out terraform.tfplan \
   -state terraform-state/terraform.tfstate \
   pcf-pipelines/tasks/pks/terraform
