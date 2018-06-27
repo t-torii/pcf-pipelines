@@ -1,8 +1,6 @@
 function generate_cert () (
   set -eu
 
-  echo "generate_cert"
-
   local domains="$1"
 
   local data=$(echo $domains | jq --raw-input -c '{"domains": (. | split(" "))}')
