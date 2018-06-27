@@ -87,7 +87,7 @@ cf_network=$(
     '
     {
       "network": {
-        "name": (if $iaas == "aws" then "deployment" else "ert" end),
+        "name": "ert",
       },
       "other_availability_zones": ($other_availability_zones | split(",") | map({name: .})),
       "singleton_availability_zone": {
