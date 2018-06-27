@@ -150,7 +150,6 @@ cf_properties=$(
     --arg routing_disable_http "$routing_disable_http" \
     --arg routing_custom_ca_certificates "$ROUTING_CUSTOM_CA_CERTIFICATES" \
     --arg routing_tls_termination $ROUTING_TLS_TERMINATION \
-    --arg pcf_ert_domain "$PCF_ERT_DOMAIN" \
     --arg system_domain "$SYSTEM_DOMAIN"\
     --arg apps_domain "$APPS_DOMAIN" \
     --arg mysql_monitor_recipient_email "$mysql_monitor_recipient_email" \
@@ -196,10 +195,6 @@ cf_properties=$(
     +
 
     # logger_endpoint_port
-      .
-
-    +
-
     # Blobstore
 
       {
