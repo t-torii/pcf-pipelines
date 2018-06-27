@@ -88,5 +88,7 @@ terraform destroy -force \
   -var "env_dns_zone_name_servers=dontcare" \
   -var "ert_subnet=dontcare" \
   -var "service_account_email=dontcare" \
+  -var "pcf_ert_ssl_cert=dontcare" \
+  -var "pcf_ert_ssl_key=dontcare" \
   -state-out $root/wipe-output/terraform.tfstate \
   pcf-pipelines/tasks/pks/terraform
