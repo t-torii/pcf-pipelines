@@ -6,6 +6,7 @@ echo "start configure-pas"
 nslookup ${OPSMAN_DOMAIN_OR_IP_ADDRESS}
 
 source pcf-pipelines/functions/generate_cert.sh
+echo "check #1"
 
 declare networking_poe_ssl_certs_json
 
@@ -14,7 +15,7 @@ saml_domains=(
   "*.login.${SYSTEM_DOMAIN}"
   "*.uaa.${SYSTEM_DOMAIN}"
 )
-
+echo "check #2"
 saml_certificates=$(generate_cert "${saml_domains[*]}")
 saml_cert_pem=`echo $saml_certificates | jq --raw-output '.certificate'`
 saml_key_pem=`echo $saml_certificates | jq --raw-output '.key'`
