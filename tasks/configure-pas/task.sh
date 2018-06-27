@@ -150,7 +150,6 @@ cf_properties=$(
     --arg routing_disable_http "$routing_disable_http" \
     --arg routing_custom_ca_certificates "$ROUTING_CUSTOM_CA_CERTIFICATES" \
     --arg routing_tls_termination $ROUTING_TLS_TERMINATION \
-    --arg iaas $pcf_iaas \
     --arg pcf_ert_domain "$PCF_ERT_DOMAIN" \
     --arg system_domain "$SYSTEM_DOMAIN"\
     --arg apps_domain "$APPS_DOMAIN" \
@@ -175,7 +174,7 @@ cf_properties=$(
       ".properties.route_services.enable.ignore_ssl_cert_verification": { "value": true },
       ".properties.system_database": { "value": "internal" },
       ".properties.uaa_database": { "value": "internal" },
-      ".properties.push_apps_manager_company_name": { "value": "pcf-\($iaas)" },
+      ".properties.push_apps_manager_company_name": { "value": "pcf" },
       ".cloud_controller.system_domain": { "value": $system_domain },
       ".cloud_controller.apps_domain": { "value": $apps_domain },
       ".cloud_controller.allow_app_ssh_access": { "value": true },
@@ -197,32 +196,12 @@ cf_properties=$(
     +
 
     # logger_endpoint_port
-    if $iaas == "aws" then
-      {
-        ".properties.logger_endpoint_port": { "value": 4443 }
-      }
-    else
       .
-    end
 
     +
 
     # Blobstore
 
-    if $iaas == "aws" then
-      {
-        ".properties.system_blobstore": { "value": "external" },
-        ".properties.system_blobstore.external.buildpacks_bucket": { "value": "\($terraform_prefix)-buildpacks" },
-        ".properties.system_blobstore.external.droplets_bucket": { "value": "\($terraform_prefix)-droplets" },
-        ".properties.system_blobstore.external.packages_bucket": { "value": "\($terraform_prefix)-packages" },
-        ".properties.system_blobstore.external.resources_bucket": { "value": "\($terraform_prefix)-resources" },
-        ".properties.system_blobstore.external.access_key": { "value": $aws_access_key },
-        ".properties.system_blobstore.external.secret_key": { "value": { "secret": $aws_secret_key } },
-        ".properties.system_blobstore.external.signature_version": { "value": "4" },
-        ".properties.system_blobstore.external.region": { "value": $aws_region },
-        ".properties.system_blobstore.external.endpoint": { "value": $s3_endpoint }
-      }
-    elif $iaas == "gcp" then
       {
         ".properties.system_blobstore": { "value": "external_gcs" },
         ".properties.system_blobstore.external_gcs.buildpacks_bucket": { "value": "\($terraform_prefix)-buildpacks" },
@@ -232,9 +211,6 @@ cf_properties=$(
         ".properties.system_blobstore.external_gcs.access_key": { "value": $gcp_storage_access_key },
         ".properties.system_blobstore.external_gcs.secret_key": { "value": { "secret": $gcp_storage_secret_key } }
       }
-    else
-      .
-    end
 
     +
 
