@@ -6,6 +6,7 @@ source "pcf-pipelines/functions/check_opsman_available.sh"
 ifconfig
 cat /etc/resolv.conf
 nslookup ${OPSMAN_DOMAIN_OR_IP_ADDRESS}
+dig ${OPSMAN_DOMAIN_OR_IP_ADDRESS}
 
 opsman_available=$(check_opsman_available "${OPSMAN_DOMAIN_OR_IP_ADDRESS}")
 if [[ $opsman_available != "available" ]]; then
