@@ -53,6 +53,20 @@ resource "google_compute_firewall" "pks-master" {
   target_tags = ["master"]
 }
 
+//// GO Router Health Checks
+resource "google_compute_firewall" "pcf-allow-http-8080" {
+  name    = "${var.prefix}-allow-http-8080"
+  network = "${google_compute_network.pcf-virt-net.name}"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["8080"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["router"]
+}
+
 // Allow access to PKS API
 resource "google_compute_firewall" "pks-api" {
   name    = "${var.prefix}-pks-api"
