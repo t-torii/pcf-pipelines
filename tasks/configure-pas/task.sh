@@ -118,7 +118,6 @@ cf_resources=$(
     # ELBs
 
     .router |= . + { "elb_names": ["http:\($terraform_prefix)-http-lb-backend","tcp:\($terraform_prefix)-wss-logs"] }
-    | .control |= . + { "elb_names": ["tcp:\($terraform_prefix)-ssh-proxy"] }
     '
 )
 

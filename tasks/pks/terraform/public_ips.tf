@@ -8,11 +8,6 @@ resource "google_compute_global_address" "pcf" {
   name = "${var.prefix}-global-pcf"
 }
 
-// Static IP address for forwarding rule for TCP LB
-resource "google_compute_address" "cf-tcp" {
-  name = "${var.prefix}-tcp-lb"
-}
-
 // Static IP address for forwarding rule for sshproxy & doppler
 resource "google_compute_address" "ssh-and-doppler" {
   name = "${var.prefix}-ssh-and-doppler"
