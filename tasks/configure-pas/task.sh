@@ -81,13 +81,12 @@ fi
 
 cf_network=$(
   jq -n \
-    --arg iaas $pcf_iaas \
     --arg singleton_availability_zone "$pcf_az_1" \
     --arg other_availability_zones "$pcf_az_1,$pcf_az_2,$pcf_az_3" \
     '
     {
       "network": {
-        "name": "ert",
+        "name": "pks",
       },
       "other_availability_zones": ($other_availability_zones | split(",") | map({name: .})),
       "singleton_availability_zone": {
@@ -100,7 +99,6 @@ cf_network=$(
 cf_resources=$(
   jq -n \
     --arg terraform_prefix $terraform_prefix \
-    --arg iaas $pcf_iaas \
     --argjson internet_connected $INTERNET_CONNECTED \
     '
     {
@@ -132,13 +130,8 @@ cf_resources=$(
 
     # ELBs
 
-    if $iaas == "aws" then
-      .router |= . + { "elb_names": ["\($terraform_prefix)-Pcf-Http-Elb"] }
-      | .diego_brain |= . + { "elb_names": ["\($terraform_prefix)-Pcf-Ssh-Elb"] }
-    elif $iaas == "gcp" then
-      .router |= . + { "elb_names": ["http:\($terraform_prefix)-http-lb-backend","tcp:\($terraform_prefix)-wss-logs"] }
-      | .diego_brain |= . + { "elb_names": ["tcp:\($terraform_prefix)-ssh-proxy"] }
-    else
+    .router |= . + { "elb_names": ["http:\($terraform_prefix)-http-lb-backend","tcp:\($terraform_prefix)-wss-logs"] }
+    | .diego_brain |= . + { "elb_names": ["tcp:\($terraform_prefix)-ssh-proxy"] }
       .
     end
     '
