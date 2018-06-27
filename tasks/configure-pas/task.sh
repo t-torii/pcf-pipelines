@@ -150,6 +150,7 @@ cf_properties=$(
     --arg routing_disable_http "$routing_disable_http" \
     --arg routing_custom_ca_certificates "$ROUTING_CUSTOM_CA_CERTIFICATES" \
     --arg routing_tls_termination $ROUTING_TLS_TERMINATION \
+    --arg security_acknowledgement "$SECURITY_ACKNOWLEDGEMENT" \
     --arg system_domain "$SYSTEM_DOMAIN"\
     --arg apps_domain "$APPS_DOMAIN" \
     --arg mysql_monitor_recipient_email "$mysql_monitor_recipient_email" \
@@ -171,6 +172,7 @@ cf_properties=$(
       ".ha_proxy.skip_cert_verify": { "value": true },
       ".properties.container_networking_interface_plugin.silk.network_cidr": { "value": $container_networking_nw_cidr },
       ".properties.route_services.enable.ignore_ssl_cert_verification": { "value": true },
+      ".properties.security_acknowledgement": { "value": $security_acknowledgement },
       ".properties.system_database": { "value": "internal_mysql" },
       ".properties.uaa_database": { "value": "internal_mysql" },
       ".properties.push_apps_manager_company_name": { "value": "pcf" },
