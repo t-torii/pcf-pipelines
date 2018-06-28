@@ -68,7 +68,7 @@ resource "google_compute_http_health_check" "cf" {
   request_path        = "/health"
   check_interval_sec  = 5
   timeout_sec         = 3
-  healthy_threshold   = 6
+  healthy_threshold   = 2
   unhealthy_threshold = 3
 }
 

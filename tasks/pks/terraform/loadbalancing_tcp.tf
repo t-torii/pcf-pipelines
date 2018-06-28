@@ -3,10 +3,10 @@ resource "google_compute_http_health_check" "cf-gorouter" {
   name                = "${var.prefix}-gorouter"
   port                = 8080
   request_path        = "/health"
-  check_interval_sec  = 30
+  check_interval_sec  = 5
   timeout_sec         = 5
-  healthy_threshold   = 10
-  unhealthy_threshold = 2
+  healthy_threshold   = 2
+  unhealthy_threshold = 3
 }
 
 
