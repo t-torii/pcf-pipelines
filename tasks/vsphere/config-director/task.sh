@@ -212,12 +212,3 @@ om-linux \
   --password "$OPS_MGR_PWD" \
   configure-director \
   --security-configuration "$security_configuration"
-
-echo "Configuring Resource Configuration..."
-om-linux \
-  --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
-  --skip-ssl-validation \
-  --username "$OPS_MGR_USR" \
-  --password "$OPS_MGR_PWD" \
-  configure-director \
-  --resource-configuration "$resource_configuration"
