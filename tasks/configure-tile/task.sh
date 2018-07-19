@@ -41,7 +41,9 @@ main() {
 
   # process any certificate generation by introspecting into properties files
   process_certificates
-  append_gcp_service_key
+  if [ -n $GCP_SERVICE_KEY ]; then
+    append_gcp_service_key
+  fi
 
   # retrieve final json content for the properties object after certificate processing
   export final_properties_object=$(cat updated_properties_object.json)
