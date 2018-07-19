@@ -41,7 +41,7 @@ main() {
 
   # process any certificate generation by introspecting into properties files
   process_certificates
-  if [ -n $GCP_SERVICE_KEY ]; then
+  if [ -z $IAAS ]; then
     append_gcp_service_key
   fi
 
