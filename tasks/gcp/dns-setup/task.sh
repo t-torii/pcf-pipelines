@@ -2,11 +2,11 @@
 
 cd terraform-state
   cat ./terraform.tfstate
-  pub_ip_global_pcf=$(cat ./terraform.tfstate | jq --raw-output '.pub_ip_global_pcf.value')
-  pub_ip_ssh_and_doppler=$(cat ./terraform.tfstate | jq --raw-output '.pub_ip_ssh_and_doppler.value')
-  pub_ip_ssh_tcp_lb=$(cat ./terraform.tfstate | jq --raw-output '.pub_ip_ssh_tcp_lb.value')
-  pub_ip_opsman=$(cat ./terraform.tfstate | jq --raw-output '.pub_ip_opsman.value')
-  pub_ip_pks_api=$(cat ./terraform.tfstate | jq --raw-output '.pub_ip_pks_api.value')
+  pub_ip_global_pcf=$(cat ./terraform.tfstate | jq '.modules[].outputs.pub_ip_global_pcf.value')
+  pub_ip_ssh_and_doppler=$(cat ./terraform.tfstate | jq '.modules[].outputs.pub_ip_ssh_and_doppler.value')
+  pub_ip_ssh_tcp_lb=$(cat ./terraform.tfstate | jq '.modules[].outputs.pub_ip_ssh_tcp_lb.value')
+  pub_ip_opsman=$(cat ./terraform.tfstate | jq '.modules[].outputs.pub_ip_opsman.value')
+  pub_ip_pks_api=$(cat ./terraform.tfstate | jq '.modules[].outputs.pub_ip_pks_api.value')
 cd -
 
 echo "Please configure DNS as follows:"
