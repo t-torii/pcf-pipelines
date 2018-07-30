@@ -1,0 +1,22 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: ttorii0609/gcloud-sdk-jq
+    tag: alpine
+
+inputs:
+- name: pcf-pipelines
+
+run:
+  path: pcf-pipelines/tasks/gcp/dns-setup/task.sh
+
+params:
+  GCP_PROJECT_NAME:
+  GCP_REGION:
+  GCP_ZONE:
+  GCP_SERVICE_KEY:
+  PKS_KUBECTL_LB_NAME:
+  GCP_RESOURCE_PREFIX:
