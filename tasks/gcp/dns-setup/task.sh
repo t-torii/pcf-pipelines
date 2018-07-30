@@ -1,12 +1,11 @@
 #!/bin/bash
 
 cd terraform-state
-  output_json="terraform.tfstate"
-  pub_ip_global_pcf=$(echo $output_json | jq --raw-output '.pub_ip_global_pcf.value')
-  pub_ip_ssh_and_doppler=$(echo $output_json | jq --raw-output '.pub_ip_ssh_and_doppler.value')
-  pub_ip_ssh_tcp_lb=$(echo $output_json | jq --raw-output '.pub_ip_ssh_tcp_lb.value')
-  pub_ip_opsman=$(echo $output_json | jq --raw-output '.pub_ip_opsman.value')
-  pub_ip_pks_api=$(echo $output_json | jq --raw-output '.pub_ip_pks_api.value')
+  pub_ip_global_pcf=$(echo ./terraform.tfstate | jq --raw-output '.pub_ip_global_pcf.value')
+  pub_ip_ssh_and_doppler=$(echo ./terraform.tfstate | jq --raw-output '.pub_ip_ssh_and_doppler.value')
+  pub_ip_ssh_tcp_lb=$(echo ./terraform.tfstate | jq --raw-output '.pub_ip_ssh_tcp_lb.value')
+  pub_ip_opsman=$(echo ./terraform.tfstate | jq --raw-output '.pub_ip_opsman.value')
+  pub_ip_pks_api=$(echo ./terraform.tfstate | jq --raw-output '.pub_ip_pks_api.value')
 cd -
 
 echo "Please configure DNS as follows:"
