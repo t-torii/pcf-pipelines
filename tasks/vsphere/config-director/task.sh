@@ -56,18 +56,7 @@ az_configuration=$(cat <<-EOF
  [
     {
       "name": "$AZ_1",
-      "cluster": "$AZ_1_CLUSTER_NAME",
-      "resource_pool": "$AZ_1_RP_NAME"
-    },
-    {
-      "name": "$AZ_2",
-      "cluster": "$AZ_2_CLUSTER_NAME",
-      "resource_pool": "$AZ_2_RP_NAME"
-    },
-    {
-      "name": "$AZ_3",
-      "cluster": "$AZ_3_CLUSTER_NAME",
-      "resource_pool": "$AZ_3_RP_NAME"
+      "cluster": "$AZ_1_CLUSTER_NAME"
     }
  ]
 EOF
@@ -83,20 +72,6 @@ network_configuration=$(
     --arg infra_dns "$INFRA_NW_DNS" \
     --arg infra_gateway "$INFRA_NW_GATEWAY" \
     --arg infra_availability_zones "$INFRA_NW_AZS" \
-    --arg deployment_network_name "$DEPLOYMENT_NETWORK_NAME" \
-    --arg deployment_vcenter_network "$DEPLOYMENT_VCENTER_NETWORK" \
-    --arg deployment_network_cidr "$DEPLOYMENT_NW_CIDR" \
-    --arg deployment_reserved_ip_ranges "$DEPLOYMENT_EXCLUDED_RANGE" \
-    --arg deployment_dns "$DEPLOYMENT_NW_DNS" \
-    --arg deployment_gateway "$DEPLOYMENT_NW_GATEWAY" \
-    --arg deployment_availability_zones "$DEPLOYMENT_NW_AZS" \
-    --arg services_network_name "$SERVICES_NETWORK_NAME" \
-    --arg services_vcenter_network "$SERVICES_VCENTER_NETWORK" \
-    --arg services_network_cidr "$SERVICES_NW_CIDR" \
-    --arg services_reserved_ip_ranges "$SERVICES_EXCLUDED_RANGE" \
-    --arg services_dns "$SERVICES_NW_DNS" \
-    --arg services_gateway "$SERVICES_NW_GATEWAY" \
-    --arg services_availability_zones "$SERVICES_NW_AZS" \
     --arg dynamic_services_network_name "$DYNAMIC_SERVICES_NETWORK_NAME" \
     --arg dynamic_services_vcenter_network "$DYNAMIC_SERVICES_VCENTER_NETWORK" \
     --arg dynamic_services_network_cidr "$DYNAMIC_SERVICES_NW_CIDR" \
@@ -123,34 +98,6 @@ network_configuration=$(
           ]
         },
         {
-          "name": $deployment_network_name,
-          "service_network": false,
-          "subnets": [
-            {
-              "iaas_identifier": $deployment_vcenter_network,
-              "cidr": $deployment_network_cidr,
-              "reserved_ip_ranges": $deployment_reserved_ip_ranges,
-              "dns": $deployment_dns,
-              "gateway": $deployment_gateway,
-              "availability_zone_names": ($deployment_availability_zones | split(","))
-            }
-          ]
-        },
-        {
-          "name": $services_network_name,
-          "service_network": false,
-          "subnets": [
-            {
-              "iaas_identifier": $services_vcenter_network,
-              "cidr": $services_network_cidr,
-              "reserved_ip_ranges": $services_reserved_ip_ranges,
-              "dns": $services_dns,
-              "gateway": $services_gateway,
-              "availability_zone_names": ($services_availability_zones | split(","))
-            }
-          ]
-        },
-        {
           "name": $dynamic_services_network_name,
           "service_network": true,
           "subnets": [
@@ -171,11 +118,9 @@ network_configuration=$(
 director_config=$(cat <<-EOF
 {
   "ntp_servers_string": "$NTP_SERVERS",
-  "resurrector_enabled": $ENABLE_VM_RESURRECTOR,
-  "max_threads": $MAX_THREADS,
+  "resurrector_enabled": false,
   "database_type": "internal",
-  "blobstore_type": "local",
-  "director_hostname": "$OPS_DIR_HOSTNAME"
+  "blobstore_type": "local"
 }
 EOF
 )
@@ -267,12 +212,3 @@ om-linux \
   --password "$OPS_MGR_PWD" \
   configure-director \
   --security-configuration "$security_configuration"
-
-echo "Configuring Resource Configuration..."
-om-linux \
-  --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
-  --skip-ssl-validation \
-  --username "$OPS_MGR_USR" \
-  --password "$OPS_MGR_PWD" \
-  configure-director \
-  --resource-configuration "$resource_configuration"
