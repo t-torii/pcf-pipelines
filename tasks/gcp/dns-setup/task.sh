@@ -1,7 +1,6 @@
 #!/bin/bash
 
 cd terraform-state
-  cat ./terraform.tfstate
   pub_ip_global_pcf=$(cat ./terraform.tfstate | jq '.modules[].outputs.pub_ip_global_pcf.value')
   pub_ip_ssh_and_doppler=$(cat ./terraform.tfstate | jq '.modules[].outputs.pub_ip_ssh_and_doppler.value')
   pub_ip_ssh_tcp_lb=$(cat ./terraform.tfstate | jq '.modules[].outputs.pub_ip_ssh_tcp_lb.value')
@@ -25,6 +24,12 @@ echo $GCP_SERVICE_KEY > /tmp/keyfile.json
 gcloud auth activate-service-account --key-file /tmp/keyfile.json
 gcloud config set project ${GCP_PROJECT_NAME}
 
+echo "==== dnsmasq.more.conf ===="
+gcloud compute --project "spartan-tesla-201301" ssh --zone "asia-east1-a" "jump-server" --quiet --command \
+"echo -e address=/opsman.pks-test.io/${pub_ip_opsman} > ./dnsmasq.more.conf"
+
+gcloud compute --project "spartan-tesla-201301" ssh --zone "asia-east1-a" "jump-server" --quiet --command \
+"sudo cp ./dnsmasq.more.conf /etc/dnsmasq.more.conf"
 
 echo "==== dnsmasq restart ===="
 # gcloud compute --project "spartan-tesla-201301" ssh --zone "asia-east1-a" "jump-server" --quiet --command \
