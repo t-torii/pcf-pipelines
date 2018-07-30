@@ -9,6 +9,7 @@ image_resource:
 
 inputs:
 - name: pcf-pipelines
+- name: terraform-state
 
 run:
   path: pcf-pipelines/tasks/gcp/dns-setup/task.sh
@@ -20,3 +21,6 @@ params:
   GCP_SERVICE_KEY:
   PKS_KUBECTL_LB_NAME:
   GCP_RESOURCE_PREFIX:
+  PCF_ERT_DOMAIN:
+  SYSTEM_DOMAIN:
+  APPS_DOMAIN:
