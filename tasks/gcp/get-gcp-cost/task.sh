@@ -6,7 +6,7 @@ gcloud auth activate-service-account --key-file /tmp/keyfile.json
 gcloud config set project ${GCP_PROJECT_NAME}
 
 cost-amount = $(gcloud beta pubsub subscriptions pull \
-projects/spartan-tesla-201301/subscriptions/gcp-billing-sub --format json \
-| jq -r '.[].message.data' | base64 --decode |  jq '.costAmount')
+projects/spartan-tesla-201301/subscriptions/gcp-billing-sub --format json --quiet \
+| jq -r '.[].message.data' | base64 -d |  jq '.costAmount')
 
 echo "cost = "$(cost-amount)"
