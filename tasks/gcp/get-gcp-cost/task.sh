@@ -26,3 +26,7 @@ if [ -n $cost ]; then
   echo $billing > gcpbilling.json
   gsutil cp gcpbilling.json "gs://${TERRAFORM_STATEFILE_BUCKET}/gcpbilling.json"
 fi
+
+cost=$(gsutil cat "gs://${TERRAFORM_STATEFILE_BUCKET}/gcpbilling.json" | jq -r '.[].message.data' | base64 -d |  jq '.costAmount')
+
+echo "cost = $cost"
