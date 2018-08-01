@@ -15,13 +15,21 @@ else
   echo "gcpbilling.json file found, skipping"
 fi
 
-billing=$(gcloud beta pubsub subscriptions pull \
-projects/spartan-tesla-201301/subscriptions/gcp-billing-sub --format json --quiet --auto-ack)
+billing="[]"
 
-cost=$(echo $billing | jq -r '.[].message.data' | base64 -d |  jq '.costAmount')
+while :
+do
+  billingTemp=$(gcloud beta pubsub subscriptions pull projects/spartan-tesla-201301/subscriptions/gcp-billing-sub --format json --quiet --auto-ack)
+  if [ $billingTemp = "[]" ]; then
+    echo "break"
+    break;
+  fi
+  billing=$(echo $billingTemp)
+  echo $billing | jq '.'
+  cost=$(echo $billing | jq -r '.[].message.data' | base64 -d |  jq '.costAmount')
+  echo "cost = $cost"
+done
 
-echo $billing | jq '.'
-echo "cost = $cost"
 
 if [ $billing != "[]" ]; then
   echo "=== copy new billing data to gs://${TERRAFORM_STATEFILE_BUCKET}/gcpbilling.json"
