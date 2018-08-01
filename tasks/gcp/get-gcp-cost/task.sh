@@ -22,7 +22,7 @@ while :
 do
   billingTemp=$(gcloud beta pubsub subscriptions pull projects/spartan-tesla-201301/subscriptions/gcp-billing-sub --format json --quiet --auto-ack)
   length=$(echo $billingTemp | jq '. | length')
-  echo $length
+  echo "length = $length"
   if [ $length -eq 0 ]; then
     echo "break"
     break;
@@ -34,7 +34,7 @@ do
 done
 
 length=$(echo $billing | jq '. | length')
-echo $length
+echo "length = $length"
 if [ $length -gt 0 ]; then
   echo "=== copy new billing data to gs://${TERRAFORM_STATEFILE_BUCKET}/gcpbilling.json"
   echo $billing > gcpbilling.json
@@ -44,3 +44,8 @@ fi
 cost=$(gsutil cat "gs://${TERRAFORM_STATEFILE_BUCKET}/gcpbilling.json" | jq -r '.[].message.data' | base64 -d |  jq '.costAmount')
 
 echo "cost = $cost"
+
+if [ $cost -gt $COST_UPPER_LIMIT ]; then
+  echo "cost($cost) reaches upperlimit($COST_UPPER_LIMIT)!"
+  exit 1
+fi
