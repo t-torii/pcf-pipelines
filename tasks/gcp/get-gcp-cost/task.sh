@@ -20,7 +20,8 @@ billing="[]"
 while :
 do
   billingTemp=$(gcloud beta pubsub subscriptions pull projects/spartan-tesla-201301/subscriptions/gcp-billing-sub --format json --quiet --auto-ack)
-  if [ $billingTemp = "[]" ]; then
+  echo $billingTemp | jq '.[] | length'
+  if [ "$billingTemp" = "[]" ]; then
     echo "break"
     break;
   fi
@@ -31,7 +32,7 @@ do
 done
 
 
-if [ $billing != "[]" ]; then
+if [ "$billing" != "[]" ]; then
   echo "=== copy new billing data to gs://${TERRAFORM_STATEFILE_BUCKET}/gcpbilling.json"
   echo $billing > gcpbilling.json
   gsutil cp gcpbilling.json "gs://${TERRAFORM_STATEFILE_BUCKET}/gcpbilling.json"
