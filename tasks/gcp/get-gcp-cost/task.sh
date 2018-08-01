@@ -13,7 +13,6 @@ if [ $(echo $files | grep -c gcpbilling.json) == 0 ]; then
   gsutil cp gcpbilling.json "gs://${TERRAFORM_STATEFILE_BUCKET}/gcpbilling.json"
 else
   echo "gcpbilling.json file found, skipping"
-  exit 0
 fi
 
 billing=$(gcloud beta pubsub subscriptions pull \
