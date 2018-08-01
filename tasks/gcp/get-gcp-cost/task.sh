@@ -23,7 +23,8 @@ cost=$(echo $billing | jq -r '.[].message.data' | base64 -d |  jq '.costAmount')
 echo $billing | jq '.'
 echo "cost = $cost"
 
-if [ -n $cost ]; then
+if [ $cost -gt 0 ]; then
+  echo "=== copy new billing data to gs://${TERRAFORM_STATEFILE_BUCKET}/gcpbilling.json"
   echo $billing > gcpbilling.json
   gsutil cp gcpbilling.json "gs://${TERRAFORM_STATEFILE_BUCKET}/gcpbilling.json"
 fi
