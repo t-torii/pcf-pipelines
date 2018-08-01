@@ -45,7 +45,7 @@ cost=$(gsutil cat "gs://${TERRAFORM_STATEFILE_BUCKET}/gcpbilling.json" | jq -r '
 
 echo "cost = $cost"
 
-if [ "$(bc -e "$cost > $COST_UPPER_LIMIT" -e quit)" -eq 1 ]; then
+if [ $(echo "$cost > $COST_UPPER_LIMIT" | bc) -eq 1 ]; then
   echo "cost($cost) reaches upperlimit($COST_UPPER_LIMIT)!"
   exit 1
 fi
