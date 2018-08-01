@@ -21,6 +21,7 @@ projects/spartan-tesla-201301/subscriptions/gcp-billing-sub --format json --quie
 cost=$(echo $billing | jq -r '.[].message.data' | base64 -d |  jq '.costAmount')
 
 echo $billing | jq '.'
+echo "cost = $cost"
 
 if [ -n $cost ]; then
   echo $billing > gcpbilling.json
